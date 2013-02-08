@@ -5,31 +5,82 @@
   <title>{% block title %} {{ SITENAME }} {% endblock %}</title>
   <link rel="shortcut icon" href="{{ STATIC_URL }}theme/img/favicon.ico"/>
   {% block head_extra_meta %}{% endblock %}
+
   {% block head %}
   <!-- <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}theme/boilerplate-min.css" media="screen" /> -->
   <!--[if lte IE 6]><link rel="stylesheet" href="{{ STATIC_URL }}theme/boilerplate-ie-min.css" type="text/css" media="screen" charset="utf-8"><![endif]-->
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" media="screen"/>
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" media="screen"/>
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css" media="screen"/>
   <!-- <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}theme/site.css" media="screen" /> -->
+  <style>
+  body {
+    background-color: #17375e;
+  }
+  #headerbox {
+    height: 70px;
+    margin-top: 10px;
+    color: white;
+  }
+
+  #logos-lk {
+  margin-left: 30px;
+  }
+
+  #login-area {
+    float: right;
+    margin-top:25px;
+  }
+
+  #footerbox {
+    height: 70px;
+    border-top: 1px solid white;
+    margin-top: 10px;
+    padding-top: 10px;
+    color: white;
+  }
+
+  </style>
+
   <script type="text/javascript" src="{% url jscat %}"></script>
   <script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
   <script type="text/javascript" src="{% url lang %}"></script>
+  
   {% endblock %}
 </head>
 <body>
 {% block start_body_js %}{% endblock %}
-<!--   <div id="header">
-    <div class="wrap selfclear">
-      <a id="logo" href="{% url home %}">GeoNode</a> -->
-<!--       <div id="login-area">
+<div class="container">
+<!-- TOP -->
+  <div class="row" id="headerbox">
+    <div class="span6">
+      <a href="{% url home %}">
+        <img src="{{ STATIC_URL }}/img/RiskInfo_Logo.png" href=>
+      </a>
+    </div>
+    <div class="span2" id="logos-lk">
+      <a href="http://www.gov.lk/">
+        <img src="{{ STATIC_URL }}/img/Gov_Logo.png">
+      </a>
+      <a href="http://www.dmc.gov.lk/">
+        <img src="{{ STATIC_URL }}/img/DMC_Logo.png">
+      </a>
+    </div>
+      <div class="span3">
+        <div id="login-area">
         {% if user.is_authenticated %}
           <a href="{% if user.get_profile %}{{ user.get_profile.get_absolute_url }}{% else %}{% url profiles_create_profile %}{% endif %}">{{ user.username}}</a> | <a href="{% url auth_logout %}">{% trans "Log out" %}</a>
         {% else %}
-	  <a href="{% url auth_login %}">{% trans "Sign in" %}</a>
+          <a href="{% url auth_login %}">{% trans "Sign in" %}</a>
           {% if REGISTRATION_OPEN %} or <a href="{% url registration_register %}">{% trans "Register" %}</a>{% endif %}
           {% trans "for extra features" %}
       {% endif %}
-      </div> -->     
-   <!-- Only show the language form if the csrf_token is present -->
+      </div> 
+    </div>
+  </div>
+
+<!-- END OF THE TOP -->
+
+<!-- Only show the language form if the csrf_token is present -->
 <!--    {% if csrf_token != "NOTPROVIDED" %}       
    {% get_current_language as LANGUAGE %}
     <form class="langbar" id="target" action="/i18n/setlang/" method="post">
@@ -63,26 +114,41 @@
     </ul>
    {% endblock %} -->
 
-<div class="container">
+
       {% block main %}{% endblock %}
       {% block content %}{% endblock %}
       {% block sidebar %}{% endblock %}
+  <div class="row">
+      <div class="span12" id="footerbox">
+        <div class="span3">
+           {% trans "Powered by" %} <a href="http://geonode.org">{% trans "GeoNode" %} {{VERSION}}</a>
+            <br> <strong>{% trans "Need Help?" %}</strong>
+            <a href="{% url help %}">{% trans "Help" %}</a> 
+            <br> <a href="{% url dev %}">{% trans "For Developers" %}</a>
+        </div>
+        <div class="span8">
+          <p style="float:left">Partners</p>
+          <div style="border-left:1px solid #fff; height:60px; float:left; margin-left:12px"></div>
+          <a href="https://www.gfdrr.org/">
+            <img src="{{ STATIC_URL }}/img/WB_logo.png">
+          </a>
+          <a href="http://www.undp.lk/default.aspx">
+            <img src="{{ STATIC_URL }}/img/UNDP_logo.png">
+          </a>
+        </div>
+      </div>  
+  </div>
 </div>
-<!--   <div id="footer">
-    <div class="wrap selfclear">             
-      {% block footer %}
-      <div class="onecol">
-       {% trans "Powered by" %} <a href="http://geonode.org">{% trans "GeoNode" %} {{VERSION}}</a>
-        | <strong>{% trans "Need Help?" %}</strong>
-        <a href="{% url help %}">{% trans "Help" %}</a> 
-        | <a href="{% url dev %}">{% trans "For Developers" %}</a>
-      </div>
-      {% endblock %} -->
- <!--    </div> --><!-- /.wrap -->
-  <!-- </div> --><!-- /#footer -->
+
   {% block end_body_js %}
   <script type="text/javascript" src="{{ STATIC_URL }}/jquery-1.6.4.min.js"></script>
-  <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
+  <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    $(".clickableBox").click(function(){
+         window.location=$(this).find("a").attr("href"); 
+         return false;
+    });
+  </script>
   {% endblock %}
 </body>
 </html>

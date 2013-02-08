@@ -7,32 +7,21 @@
 {% block head %} 
 {{ block.super }}
 <style>
-body {
-  background-color: #17375e;
-}
 
 .orange-light{
  background-color: #fdeada;
- min-height: 120px;
- margin-top: 5px;
 }
 
 .orange-dark{
 background-color: #fcd5b5;
-min-height: 120px;
-margin-top: 5px;
 }
 
 .blue-dark {
   background-color: #b9cde5;
-  min-height: 120px;
-  margin-top: 5px;
 }
 
 .blue-light{
   background-color: #dce6f2;
-  min-height: 120px;
-  margin-top: 5px;
 }
 
 #headerbox {
@@ -125,30 +114,35 @@ margin-top: 5px;
   box-sizing: border-box;
 }
 
-#footerbox {
-  height: 70px;
-  border-top: 1px solid white;
-  margin-top: 10px;
-  padding-top: 10px;
+.minibox {
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: right;
+  min-height: 130px;
+  margin-top: 5px;
 }
+
+.minibox > a {
+  color: black;
+  text-decoration: none;
+}
+
+.minibox:hover {
+  opacity: 0.9;
+  border: 2px solid black;
+  padding: 8px;
+}
+
+
 
 </style>
 {% endblock %}
 
-{% block main %} 
-<div class="row" id="headerbox">
-  <div class="span8">
-    <img src="{{ STATIC_URL }}/img/RiskInfo_Logo.png">
-  </div>
-  <div class="span2" id="logos-lk">
-    <img src="{{ STATIC_URL }}/img/Gov_Logo.png">
-    <img src="{{ STATIC_URL }}/img/DMC_Logo.png">
-  </div>
-    <div class="span2">
-  </div>
+{% block main %}
 
-
-</div>
 <div class="row">
   <div class="span4" id="welcomebox">
      <h4>Welcome</h4>
@@ -170,21 +164,27 @@ margin-top: 5px;
           {% endblocktrans %}
         </p>
         <div>
-          <form action="{% url data_search %}" method="POST" class="boxform">
+          <form action="{% url maps_search %}" method="POST" class="boxform">
             {% csrf_token %}
-             <input class="input-medium" type="text" class="boxinput" id="search_query" name="q" />
-             <button class="boxbutton btn small primary" type="submit" id="submit_search">{% trans "Search" %}</button>
+             <input class="input-large" type="text" class="boxinput" id="search_query_maps" name="q" />
+             <button class="boxbutton btn small primary" type="submit" id="submit_search_maps">{% trans "Search" %}</button>
           </form>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="span2 orange-light"> Tsunami</div>
-      <div class="span2 orange-dark"> Flood</div>
+      <!-- Looking for a way not to hardcode the URL-->
+      <div class="span2 orange-light minibox "> <a href="{% url maps_search %}">Hazard profile maps</a></div>
+      <div class="span2 orange-dark minibox clickableBox"> <a href="http://www.riskinfo.lk/maps/2"> Administrative boundaries </a></div>
     </div>
     <div class="row">
-      <div class="span2 orange-dark"> Map 3 </div>
-      <div class="span2 orange-light"> All Maps </div>
+      <div class="span2 orange-dark minibox clickableBox"><a href="{% url maps_search %}"> Explore maps </a> </div>
+      <div class="span2 orange-light minibox"> Create a new map 
+        <form action="{% url maps_new %}" method="POST" class="boxform">
+          {% csrf_token %}
+          <button class="miniboxbutton btn small primary" type="submit" id="submit_search">{% trans "Create map" %}</button>
+        </form>
+      </div>
     </div>
   </div>
   <div class="span4" id="dataspan">
@@ -195,29 +195,20 @@ margin-top: 5px;
         <p class="boxtext">RiskInfo lets you upload, manage, and browse data. <strong>Search</strong> for data that is valuable to you, or <strong>upload</strong> your own data.</p>
         <form action="{% url data_search %}" method="POST" class="boxform">
       {% csrf_token %}
-       <input class="input-medium" type="text" class="boxinput" id="search_query" name="q" />
+       <input class="input-large" type="text" class="boxinput" id="search_query" name="q" />
        <button class="boxbutton btn small primary" type="submit" id="submit_search">{% trans "Search" %}</button>
     </form>
       </div>
     </div>
     <div class="row">
-      <div class="span2 blue-light"> Hazard</div>
-      <div class="span2 blue-dark"> Exposure</div>
+      <!-- Looking for a way not to hardcode the URL-->
+      <div class="span2 blue-light minibox clickableBox"><img width="50" height="50" src="{{ STATIC_URL }}/img/tsunami.png"><a href="http://localhost/data/search?q=hazard"> Hazard data </a><img style="float:left" width="50" height="50" src="{{ STATIC_URL }}/img/flood.png"><img style="float:left" width="50" height="50" src="{{ STATIC_URL }}/img/cyclone.png"></div>
+      <div class="span2 blue-dark minibox clickableBox"> <a href="http://localhost/data/search?q=exposure">Exposure data </a></div>
     </div>
     <div class="row">
-      <div class="span2 blue-dark"> Base data </div>
-      <div class="span2 blue-light"> All data </div>
+      <div class="span2 blue-dark minibox clickableBox"> <a href="http://localhost/data/search?q=base"> Base data </div>
+      <div class="span2 blue-light minibox clickableBox"> <a href="{% url data_search %}"> View all data </a> </div>
     </div> 
-  </div>
-  <div class="row">
-    <div class="span12" id="footerbox">
-    <div class="span2">
-    </div>
-    <div class="span9 offset1">
-      <img src="{{ STATIC_URL }}/img/WB_logo.png">
-      <img src="{{ STATIC_URL }}/img/UNDP_logo.png">
-    </div>
-  </div>  
   </div>
 </div>
 {% endblock %}

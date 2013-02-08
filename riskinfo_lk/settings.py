@@ -10,7 +10,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 GEONODE_ROOT = os.path.dirname(geonode.__file__)
 
 
-SITENAME = "Mozambique Adaptation"
+SITENAME = "Risk Info Sri Lanka"
 SITEURL = "http://localhost/"
 
 # Setting debug to true makes Django serve static media and
@@ -254,14 +254,6 @@ NOSE_ARGS = [
       '--detailed-errors',
       '--with-xunit',
       ]
-
-#
-# GeoNode specific settings
-#
-
-SITENAME = "GeoNode"
-
-SITEURL = "http://localhost:8000/"
 
 # GeoServer information
 
