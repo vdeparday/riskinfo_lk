@@ -143,7 +143,6 @@ background-color: #fcd5b5;
 
 {% block main %}
 
-<div class="row">
   <div class="span4" id="welcomebox">
      <h4>Welcome</h4>
      <img src="{{ STATIC_URL }}/img/welcome_map_image.png">
@@ -206,11 +205,10 @@ background-color: #fcd5b5;
       <div class="span2 blue-dark minibox clickableBox"> <a href="http://localhost/data/search?q=exposure">Exposure data </a></div>
     </div>
     <div class="row">
-      <div class="span2 blue-dark minibox clickableBox"> <a href="http://localhost/data/search?q=base"> Base data </div>
+      <div class="span2 blue-dark minibox clickableBox"> <a href="http://localhost/data/search?q=base"> Base data </a></div>
       <div class="span2 blue-light minibox clickableBox"> <a href="{% url data_search %}"> View all data </a> </div>
     </div> 
   </div>
-</div>
 {% endblock %}
 {% block sidebar %}
 {% endblock %}
