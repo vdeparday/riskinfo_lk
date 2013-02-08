@@ -5,93 +5,219 @@
 {% block indexclass %} class="here" {% endblock %}
 
 {% block head %} 
-{% include "geonode/ext_header.html" %}
 {{ block.super }}
-<script type="text/javascript">
-Ext.onReady(function(){
-{% autoescape off %}
+<style>
+body {
+  background-color: #17375e;
+}
 
-  var exploreMapButton = new Ext.Button({
-     renderTo: 'explore_map', 
-     text: '{% trans "Explore Maps" %}',
-     handler: function(){ window.location = "{% url maps_search %}"; }
-  });
+.orange-light{
+ background-color: #fdeada;
+ min-height: 120px;
+ margin-top: 5px;
+}
 
-  var createMapButton = new Ext.Button({
-     renderTo: 'create_map', 
-     text: '{% trans "Create Map" %}',
-     handler: function(){ window.location = "{% url maps_new %}"; }
-  });
+.orange-dark{
+background-color: #fcd5b5;
+min-height: 120px;
+margin-top: 5px;
+}
 
-  var submitForm = function() {
-      Ext.query('#data_block form')[0].submit();
-  };
+.blue-dark {
+  background-color: #b9cde5;
+  min-height: 120px;
+  margin-top: 5px;
+}
 
-  var searchButton = new Ext.Button({renderTo: 'submit_search', text: '{% trans "Search" %}',
-                                     handler: submitForm});
+.blue-light{
+  background-color: #dce6f2;
+  min-height: 120px;
+  margin-top: 5px;
+}
 
-  var searchInput = new Ext.form.TextField({applyTo: 'search_query', width: 350});
+#headerbox {
+  height: 70px;
+  margin-top: 10px;
+}
 
-{% endautoescape %}
-});
-</script>
+#logos-lk {
+  margin-left: 30px;
+}
+
+#welcomebox {
+  background-color: white;
+  /*margin-left: 0;
+  margin-right: 0;*/
+  padding-left: 15px;
+  padding-right: 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  /*.box-sizing(border-box);*/
+}
+
+#welcometext {
+  margin-top:10px;
+  text-align:justify;
+}
+
+#mapsspan {
+  /*margin-left: 25px;*/
+}
+
+.boxtitle {
+  color: white;
+  float: left;
+  margin-top: 15px;
+}
+
+.boxtext {
+  text-align:justify;
+  clear: right;
+}
+
+.boximage {
+  float: right; 
+  margin-top:15px;
+  margin-bottom: 15px;
+}
+
+.boxform {
+  padding-top: 15px;
+}
+
+.boxinput {
+  float:left;
+  margin-top:10px;
+}
+
+.boxbutton {
+  float: right; 
+  position: relative; 
+  right: 10px;" 
+}
+
+#mapsbox {
+  background-color: #e46c0a;
+  min-height: 240px;
+  padding-left: 15px;
+  padding-right: 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+#dataspan {
+  /*margin-left:8px;*/
+}
+
+#databox {
+  background-color: #558ed5;
+  padding-left: 15px;
+  padding-right: 15px;
+  min-height: 240px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#footerbox {
+  height: 70px;
+  border-top: 1px solid white;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+</style>
 {% endblock %}
 
 {% block main %} 
-<div class="twocol">
-<!-- TODO: i18n on the text here -->
-  <div class="block">
-    <h2> {% trans "Welcome" %} </h2>
-    <p>
-    {% blocktrans %}
-  Welcome to the Sri Lanka Disaster Risk Information Platform (RiskInfo). The purpose of RiskInfo is to make disaster risk information available to all the stakeholders and the public in order to facilitate disaster risk reduction and recovery efforts. The initiative is led by the Disaster Management Center (DMC) in partnership with UNDP, NGOs and GDFRR Labs. The data sharing platform is built using the open source software GeoNode that is designed to enable collaborative use of geospatial data and maps. To get in touch and get in account to upload data: riskinfo@dmc.gov.lk
-    {% endblocktrans %} 
-  </p>
+<div class="row" id="headerbox">
+  <div class="span8">
+    <img src="{{ STATIC_URL }}/img/RiskInfo_Logo.png">
   </div>
-  <div class="block">
-    <h2> {% trans "Maps" %} </h2>
-    <p>
-    {% blocktrans %} 
-  GeoNode lets you compose and share maps.  <strong>Create</strong>
-      a map with our cartography tool, or <strong>explore</strong> maps
-      shared by others.
-    {% endblocktrans %} 
-  </p>
-    <div class="selfclear">
-      <div id="explore_map" class="content-button"></div>
-      <div id="create_map" class="content-button"></div>
+  <div class="span2" id="logos-lk">
+    <img src="{{ STATIC_URL }}/img/Gov_Logo.png">
+    <img src="{{ STATIC_URL }}/img/DMC_Logo.png">
+  </div>
+    <div class="span2">
+  </div>
+
+
+</div>
+<div class="row">
+  <div class="span4" id="welcomebox">
+     <h4>Welcome</h4>
+     <img src="{{ STATIC_URL }}/img/welcome_map_image.png">
+      <p id="welcometext">
+      {% blocktrans %}
+    Welcome to the Sri Lanka Disaster Risk Information Platform (RiskInfo). The purpose of RiskInfo is to make disaster risk information available to all the stakeholders and the public in order to facilitate disaster risk reduction and recovery efforts. The initiative is led by the Disaster Management Center (DMC) in partnership with UNDP, NGOs and GDFRR Labs. The data sharing platform is built using the open source software GeoNode that is designed to enable collaborative use of geospatial data and maps. To get in touch and get in account to upload data: riskinfo@dmc.gov.lk
+      {% endblocktrans %} 
+      </p>
+  </div>
+  <div class="span4" id="mapsspan">
+    <div class="row">
+      <div class="span4" id="mapsbox"> 
+        <h4 class="boxtitle"> {% trans "MAPS" %} </h4>
+        <img class="boximage" src="{{ STATIC_URL }}/img/Map_icon.png">
+        <p class="boxtext"> 
+          {% blocktrans %} 
+          RiskInfo lets you compose and share maps.  <strong>Create</strong> a map with our cartography tool, or <strong>explore</strong> maps shared by others.
+          {% endblocktrans %}
+        </p>
+        <div>
+          <form action="{% url data_search %}" method="POST" class="boxform">
+            {% csrf_token %}
+             <input class="input-medium" type="text" class="boxinput" id="search_query" name="q" />
+             <button class="boxbutton btn small primary" type="submit" id="submit_search">{% trans "Search" %}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span2 orange-light"> Tsunami</div>
+      <div class="span2 orange-dark"> Flood</div>
+    </div>
+    <div class="row">
+      <div class="span2 orange-dark"> Map 3 </div>
+      <div class="span2 orange-light"> All Maps </div>
     </div>
   </div>
-  <div id="data_block" class="block">
-    <h2> {% trans "Data" %} </h2>
-    <p>
-    {% blocktrans %} 
-  GeoNode lets you upload, manage, and browse data.  
-      <strong>Search</strong> for data that is valuable to you, or 
-      <strong>upload</strong> your own data.
-    {% endblocktrans %} 
-    </p>
-
-    <!-- Data search text box and button -->
-
-    <form action="{% url data_search %}" method="POST">
+  <div class="span4" id="dataspan">
+     <div class="row">
+      <div class="span4" id="databox">
+        <h4 class="boxtitle"> {% trans "DATA" %} </h4>
+        <img class="boximage" src="{{ STATIC_URL }}/img/Data_icon.png">
+        <p class="boxtext">RiskInfo lets you upload, manage, and browse data. <strong>Search</strong> for data that is valuable to you, or <strong>upload</strong> your own data.</p>
+        <form action="{% url data_search %}" method="POST" class="boxform">
       {% csrf_token %}
-        <table>
-          <tr>
-            <td>
-              <input type="text" id="search_query" name="q" />
-            </td>
-            <td>
-              <div id="submit_search"></div>
-            </td>
-          </tr>
-        </table>
-        <a href="{% url data_search %}">{% trans "Advanced Search" %}</a>
+       <input class="input-medium" type="text" class="boxinput" id="search_query" name="q" />
+       <button class="boxbutton btn small primary" type="submit" id="submit_search">{% trans "Search" %}</button>
     </form>
-  
-    <!-- Links to specialized views of data -->
-    <!-- Upload data button (link?) -->
-    <a class="layer-upload-link" href="{% url data_upload %}">{% trans "Upload data"  %}</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span2 blue-light"> Hazard</div>
+      <div class="span2 blue-dark"> Exposure</div>
+    </div>
+    <div class="row">
+      <div class="span2 blue-dark"> Base data </div>
+      <div class="span2 blue-light"> All data </div>
+    </div> 
+  </div>
+  <div class="row">
+    <div class="span12" id="footerbox">
+    <div class="span2">
+    </div>
+    <div class="span9 offset1">
+      <img src="{{ STATIC_URL }}/img/WB_logo.png">
+      <img src="{{ STATIC_URL }}/img/UNDP_logo.png">
+    </div>
+  </div>  
   </div>
 </div>
 {% endblock %}

@@ -6,21 +6,21 @@
   <link rel="shortcut icon" href="{{ STATIC_URL }}theme/img/favicon.ico"/>
   {% block head_extra_meta %}{% endblock %}
   {% block head %}
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}theme/boilerplate-min.css" media="screen" />
+  <!-- <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}theme/boilerplate-min.css" media="screen" /> -->
   <!--[if lte IE 6]><link rel="stylesheet" href="{{ STATIC_URL }}theme/boilerplate-ie-min.css" type="text/css" media="screen" charset="utf-8"><![endif]-->
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}theme/site.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" media="screen"/>
+  <!-- <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}theme/site.css" media="screen" /> -->
   <script type="text/javascript" src="{% url jscat %}"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}/jquery-1.6.4.min.js"></script>
   <script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
   <script type="text/javascript" src="{% url lang %}"></script>
   {% endblock %}
 </head>
 <body>
 {% block start_body_js %}{% endblock %}
-  <div id="header">
+<!--   <div id="header">
     <div class="wrap selfclear">
-      <a id="logo" href="{% url home %}">GeoNode</a>
-      <div id="login-area">
+      <a id="logo" href="{% url home %}">GeoNode</a> -->
+<!--       <div id="login-area">
         {% if user.is_authenticated %}
           <a href="{% if user.get_profile %}{{ user.get_profile.get_absolute_url }}{% else %}{% url profiles_create_profile %}{% endif %}">{{ user.username}}</a> | <a href="{% url auth_logout %}">{% trans "Log out" %}</a>
         {% else %}
@@ -28,13 +28,9 @@
           {% if REGISTRATION_OPEN %} or <a href="{% url registration_register %}">{% trans "Register" %}</a>{% endif %}
           {% trans "for extra features" %}
       {% endif %}
-      </div>
-    </div><!-- /.wrap -->
-  </div><!-- /#header -->
-  <div id="crossbar">
-    <div class="wrap selfclear">      
+      </div> -->     
    <!-- Only show the language form if the csrf_token is present -->
-   {% if csrf_token != "NOTPROVIDED" %}       
+<!--    {% if csrf_token != "NOTPROVIDED" %}       
    {% get_current_language as LANGUAGE %}
     <form class="langbar" id="target" action="/i18n/setlang/" method="post">
       {% csrf_token %}
@@ -49,9 +45,9 @@
          </select>
        </div>
      </form>
-   {% endif %}
+   {% endif %} -->
 
-      {% block nav %}
+<!--       {% block nav %}
     <ul id="sitenav" class="selfclear">
         <li class="home"><a href="{% url home %}">{% trans "Home" %}</a></li> 
         <li class=""><a class="" id="dataLink" href="{% url data_home %}">{% trans "Data" %}</a></li>
@@ -65,19 +61,14 @@
     {% endif %}
 
     </ul>
-   {% endblock %}
+   {% endblock %} -->
 
-
-    </div><!-- /.wrap -->
-  </div><!-- /#crossbar -->
-  <div id="main">
-    <div class="wrap selfclear">       
+<div class="container">
       {% block main %}{% endblock %}
       {% block content %}{% endblock %}
       {% block sidebar %}{% endblock %}
-    </div><!-- /.wrap -->
-  </div><!-- /#main -->
-  <div id="footer">
+</div>
+<!--   <div id="footer">
     <div class="wrap selfclear">             
       {% block footer %}
       <div class="onecol">
@@ -86,9 +77,12 @@
         <a href="{% url help %}">{% trans "Help" %}</a> 
         | <a href="{% url dev %}">{% trans "For Developers" %}</a>
       </div>
-      {% endblock %}
-    </div><!-- /.wrap -->
-  </div><!-- /#footer -->
-  {% block end_body_js %}{% endblock %}
+      {% endblock %} -->
+ <!--    </div> --><!-- /.wrap -->
+  <!-- </div> --><!-- /#footer -->
+  {% block end_body_js %}
+  <script type="text/javascript" src="{{ STATIC_URL }}/jquery-1.6.4.min.js"></script>
+  <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
+  {% endblock %}
 </body>
 </html>
