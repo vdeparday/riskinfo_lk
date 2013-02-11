@@ -43,7 +43,7 @@ background-color: #fcd5b5;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
-  /*.box-sizing(border-box);*/
+  min-height: 510px;
 }
 
 #welcometext {
@@ -173,7 +173,7 @@ background-color: #fcd5b5;
     </div>
     <div class="row">
       <!-- Looking for a way not to hardcode the URL-->
-      <div class="span2 orange-light minibox "> <a href="{% url maps_search %}">Hazard profile maps</a></div>
+      <div class="span2 orange-light minibox clickableBox"> <a href="{% url maps_search %}">Hazard profile maps</a></div>
       <div class="span2 orange-dark minibox clickableBox"> <a href="http://www.riskinfo.lk/maps/2"> Administrative boundaries </a></div>
     </div>
     <div class="row">
