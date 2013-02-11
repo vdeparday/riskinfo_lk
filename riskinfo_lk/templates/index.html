@@ -46,6 +46,10 @@ background-color: #fcd5b5;
   min-height: 510px;
 }
 
+#welcomebox img {
+  max-width: 100%
+}
+
 #welcometext {
   margin-top:10px;
   text-align:justify;
@@ -201,11 +205,11 @@ background-color: #fcd5b5;
     </div>
     <div class="row">
       <!-- Looking for a way not to hardcode the URL-->
-      <div class="span2 blue-light minibox clickableBox"><img width="50" height="50" src="{{ STATIC_URL }}/img/tsunami.png"><a href="http://localhost/data/search?q=hazard"> Hazard data </a><img style="float:left" width="50" height="50" src="{{ STATIC_URL }}/img/flood.png"><img style="float:left" width="50" height="50" src="{{ STATIC_URL }}/img/cyclone.png"></div>
-      <div class="span2 blue-dark minibox clickableBox"> <a href="http://localhost/data/search?q=exposure">Exposure data </a></div>
+      <div class="span2 blue-light minibox clickableBox"><img width="50" height="50" src="{{ STATIC_URL }}/img/tsunami.png"><a href="{% url data_search %}?q=hazard"> Hazard data </a><img style="float:left" width="50" height="50" src="{{ STATIC_URL }}/img/flood.png"><img style="float:left" width="50" height="50" src="{{ STATIC_URL }}/img/cyclone.png"></div>
+      <div class="span2 blue-dark minibox clickableBox"> <a href="{% url data_search %}?q=exposure">Exposure data </a></div>
     </div>
     <div class="row">
-      <div class="span2 blue-dark minibox clickableBox"> <a href="http://localhost/data/search?q=base"> Base data </a></div>
+      <div class="span2 blue-dark minibox clickableBox"> <a href="{% url data_search %}?q=base"> Base data </a></div>
       <div class="span2 blue-light minibox clickableBox"> <a href="{% url data_search %}"> View all data </a> </div>
     </div> 
   </div>
