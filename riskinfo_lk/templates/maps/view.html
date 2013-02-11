@@ -76,18 +76,67 @@ Ext.onReady(function() {
 {% endautoescape %}
 });
 </script>
+<style>
+  #ext-gen24 {
+    background-color: #17375e;
+  }
+
+  #headerbox {
+    height: 60px;
+    color: white;
+    background-color: #17375e;
+    margin-top: 5px;
+  }
+
+  #logos-lk {
+  margin-left: 30px;
+  display: inline;
+  }
+
+  #login-area {
+    position: relative;
+    top: 20px;
+    float: right;
+  }
+</style>
 
 {% endblock %}
 
 {% block body %}
+ 
 <div id="header-wrapper">
-  {{ block.super }}
-  <div id="topPanel">
+    <div class="row" id="headerbox">
+        <div class="span12" >
+              <a href="{% url home %}">
+                <img src="{{ STATIC_URL }}/img/RiskInfo_Logo.png">
+              </a>
+              <div id="logos-lk">
+              <a href="http://www.gov.lk/">
+                <img src="{{ STATIC_URL }}/img/Gov_Logo.png">
+              </a>
+              <a href="http://www.dmc.gov.lk/">
+                <img src="{{ STATIC_URL }}/img/DMC_Logo.png">
+              </a>
+            </div>
+            <div id="login-area">
+                {% if user.is_authenticated %}
+                  <a href="{% if user.get_profile %}{{ user.get_profile.get_absolute_url }}{% else %}{% url profiles_create_profile %}{% endif %}">{{ user.username}}</a> | <a href="{% url auth_logout %}">{% trans "Log out" %}</a>
+                {% else %}
+                  <a href="{% url auth_login %}">{% trans "Sign in" %}</a>
+                  {% if REGISTRATION_OPEN %} or <a href="{% url registration_register %}">{% trans "Register" %}</a>{% endif %}
+                  {% trans "for extra features" %}
+              {% endif %}
+            </div>
+      </div>
+  </div>
+  <div class="row" id="topPanel">
+    <div class="span12">
     <div id="more-info"></div>
     <span id="map-title-header"></span>
+    </div>
   </div>
 </div>
-<div id="templates">
+<div class="row" id="templates">
   <div id="more-info-tpl"><a class='link' href='{permalink}'>{% trans "View info" %}</a></div>
   <div id="title-tpl"><a class='maplist' href='/maps/search'>{% trans "Maps" %}</a> / <strong>{title}</strong></div>
 </div>
