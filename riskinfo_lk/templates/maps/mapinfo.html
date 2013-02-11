@@ -9,6 +9,15 @@
 {% include "geonode/app_header.html" %}
 {% include "geonode/geo_header.html" %}
 {{ block.super }}
+<style>
+.well {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+</style>
 <script type="text/javascript">
 var app;
 Ext.onReady(function() {
@@ -60,9 +69,22 @@ Ext.onReady(function() {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 {% endblock %}
+{% block topmenu %}
+<div class="row">
+  <div class="span2 menuitem clickableBox" id="home">
+    <a href="{% url home %}">{% trans "HOME" %}</a>
+  </div>
+  <div class="span2 menuitem clickableBox" id="data">
+    <a href="{% url data_search %}"> {% trans "DATA" %}</a>
+  </div>
+  <div class="span8 menuitem clickableBox" id="maps">
+    <a href="{% url maps_search %}">{% trans "MAPS" %}</a>
+  </div>
+</div>
+{% endblock %} 
 
 {% block main %}
-<div class="twocol">
+<div class="well span8">
    {% overall_rating map "map" as map_rating %}
   <h3>{{map.title}}</h3>
 	<div class="overall_rating" data-rating="{{ map_rating }}"></div>
@@ -119,7 +141,7 @@ Ext.onReady(function() {
 </div>
 {% endblock %}
 {% block sidebar %}
-<div id="sidebar" class="threecol">
+<div id="sidebar" class="well span4">
     <h3>{% trans "Download" %}</h3>
     <p><a href="{% url maps_download map.id %}">{% trans "Download all layers included in this map" %}</a></p>
     <h3>{% trans "Layers" %}</h3>
